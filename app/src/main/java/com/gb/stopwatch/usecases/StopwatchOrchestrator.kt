@@ -1,19 +1,20 @@
-package com.gb.stopwatch.domain
+package com.gb.stopwatch.usecases
 
+import com.gb.stopwatch.domain.StopwatchStateHolder
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class StopwatchListOrchestrator(
+class StopwatchOrchestrator(
     private val stopwatchStateHolder: StopwatchStateHolder,
     private val scope: CoroutineScope,
-) {
+) : IStopwatchOrchestrator {
 
     private var job: Job? = null
     private val mutableTicker = MutableStateFlow("")
-    val ticker: StateFlow<String> = mutableTicker
+    override val ticker: StateFlow<String> = mutableTicker
 
-    fun start() {
+    override fun start() {
         if (job == null) startJob()
         stopwatchStateHolder.start()
     }
@@ -27,12 +28,12 @@ class StopwatchListOrchestrator(
         }
     }
 
-    fun pause() {
+    override fun pause() {
         stopwatchStateHolder.pause()
         stopJob()
     }
 
-    fun stop() {
+    override fun stop() {
         stopwatchStateHolder.stop()
         stopJob()
         clearValue()
