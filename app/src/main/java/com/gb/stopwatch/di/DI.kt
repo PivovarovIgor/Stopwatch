@@ -1,6 +1,10 @@
 package com.gb.stopwatch.di
 
 import com.gb.stopwatch.domain.*
+import com.gb.stopwatch.domain.helpers.ElapsedTimeCalculator
+import com.gb.stopwatch.domain.helpers.StopwatchStateCalculator
+import com.gb.stopwatch.domain.helpers.TimestampMillisecondsFormatter
+import com.gb.stopwatch.domain.helpers.TimestampProvider
 import com.gb.stopwatch.usecases.IStopwatchOrchestrator
 import com.gb.stopwatch.usecases.StopwatchOrchestratorImpl
 import com.gb.stopwatch.viewmodel.MainViewModel

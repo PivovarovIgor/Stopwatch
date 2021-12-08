@@ -1,4 +1,4 @@
-package com.gb.stopwatch.domain
+package com.gb.stopwatch.domain.helpers
 
 class TimestampMillisecondsFormatter {
 
