@@ -11,7 +11,7 @@ class StopwatchOrchestratorImpl(
 ) : IStopwatchOrchestrator {
 
     private var job: Job? = null
-    private val mutableTicker = MutableStateFlow("")
+    private val mutableTicker = MutableStateFlow(stopwatchStateHolder.getStringTimeRepresentation())
     override val ticker: StateFlow<String> = mutableTicker
 
     override fun start() {
@@ -23,7 +23,7 @@ class StopwatchOrchestratorImpl(
         coroutineScope.launch {
             while (isActive) {
                 mutableTicker.value = stopwatchStateHolder.getStringTimeRepresentation()
-                delay(20)
+                delay(UPDATE_DELAY)
             }
         }
     }
@@ -45,6 +45,10 @@ class StopwatchOrchestratorImpl(
     }
 
     private fun clearValue() {
-        mutableTicker.value = "00:00:000"
+        mutableTicker.value = stopwatchStateHolder.getStringTimeRepresentation()
+    }
+
+    companion object {
+        private const val UPDATE_DELAY = 20L
     }
 }
