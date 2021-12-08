@@ -2,7 +2,7 @@ package com.gb.stopwatch.di
 
 import com.gb.stopwatch.domain.*
 import com.gb.stopwatch.usecases.IStopwatchOrchestrator
-import com.gb.stopwatch.domain.StopwatchOrchestratorImpl
+import com.gb.stopwatch.usecases.StopwatchOrchestratorImpl
 import com.gb.stopwatch.viewmodel.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

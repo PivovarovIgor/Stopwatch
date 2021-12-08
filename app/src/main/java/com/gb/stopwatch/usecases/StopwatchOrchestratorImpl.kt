@@ -1,6 +1,6 @@
-package com.gb.stopwatch.domain
+package com.gb.stopwatch.usecases
 
-import com.gb.stopwatch.usecases.IStopwatchOrchestrator
+import com.gb.stopwatch.domain.StopwatchStateHolder
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
