@@ -1,13 +1,13 @@
-package com.gb.stopwatch.usecases
+package com.gb.stopwatch.domain
 
-import com.gb.stopwatch.domain.StopwatchStateHolder
+import com.gb.stopwatch.usecases.IStopwatchOrchestrator
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class StopwatchOrchestrator(
+class StopwatchOrchestratorImpl(
     private val stopwatchStateHolder: StopwatchStateHolder,
-    private val scope: CoroutineScope,
+    private val coroutineScope: CoroutineScope,
 ) : IStopwatchOrchestrator {
 
     private var job: Job? = null
@@ -20,7 +20,7 @@ class StopwatchOrchestrator(
     }
 
     private fun startJob() {
-        scope.launch {
+        coroutineScope.launch {
             while (isActive) {
                 mutableTicker.value = stopwatchStateHolder.getStringTimeRepresentation()
                 delay(20)
@@ -40,7 +40,7 @@ class StopwatchOrchestrator(
     }
 
     private fun stopJob() {
-        scope.coroutineContext.cancelChildren()
+        coroutineScope.coroutineContext.cancelChildren()
         job = null
     }
 

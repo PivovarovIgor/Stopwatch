@@ -1,5 +1,7 @@
 package com.gb.stopwatch.domain
 
+import com.gb.stopwatch.domain.data.StopwatchState
+
 class StopwatchStateHolder(
     private val stopwatchStateCalculator: StopwatchStateCalculator,
     private val elapsedTimeCalculator: ElapsedTimeCalculator,
