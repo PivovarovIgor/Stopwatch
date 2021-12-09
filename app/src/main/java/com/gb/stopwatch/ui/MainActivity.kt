@@ -3,8 +3,6 @@ package com.gb.stopwatch.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gb.stopwatch.databinding.ActivityMainBinding
-import com.gb.stopwatch.viewmodel.MainViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,28 +10,14 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: MainViewModel by viewModel()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        viewModel.liveData.observe(this, ::renderData)
-
-        with(binding) {
-            buttonStart.setOnClickListener {
-                viewModel.start()
-            }
-            buttonPause.setOnClickListener {
-                viewModel.pause()
-            }
-            buttonStop.setOnClickListener {
-                viewModel.stop()
-            }
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(binding.timer1.id, TimerFragment.newInstance())
+                .add(binding.timer2.id, TimerFragment.newInstance())
+                .commitNow()
         }
-    }
-
-    private fun renderData(state: String) {
-        binding.textTime.text = state
     }
 }

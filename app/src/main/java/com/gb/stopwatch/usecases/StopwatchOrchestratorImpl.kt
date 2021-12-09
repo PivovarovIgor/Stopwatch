@@ -15,12 +15,15 @@ class StopwatchOrchestratorImpl(
     override val ticker: StateFlow<String> = mutableTicker
 
     override fun start() {
-        if (job == null) startJob()
+        startJob()
         stopwatchStateHolder.start()
     }
 
     private fun startJob() {
-        coroutineScope.launch {
+        if (job != null) {
+            return
+        }
+        job = coroutineScope.launch {
             while (isActive) {
                 mutableTicker.value = stopwatchStateHolder.getStringTimeRepresentation()
                 delay(UPDATE_DELAY)
